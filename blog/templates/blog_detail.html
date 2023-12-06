@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .max-w-2xl {
+        max-width: 70rem;
+    }
+
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f7fafc;
+        color: #1a202c;
+    }
+
+    .blog-container {
+        background-color: #ffffff;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-all;
+        margin-left: 120px;
+
+    }
+
+    .blog-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #4a5568;
+        margin-bottom: 1rem;
+    }
+
+    .blog-description {
+        font-size: 1.25rem;
+        color: #718096;
+        margin-bottom: 2rem;
+    }
+
+    .post-container {
+        margin-bottom: 2rem;
+    }
+
+    .post-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #4299e1;
+        margin-bottom: 1rem;
+    }
+
+    .post-content {
+        font-size: 1rem;
+        color: #2d3748;
+        margin-bottom: 1.5rem;
+    }
+
+    .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    }
+
+</style>
+<div class="w-full max-w-2xl mx-auto blog-container">
+        <p class="blog-description">Published by {{ post.author_name }} on {{ post.pub_date }}</p>
+        <div class="post-container">
+            <div class="post-title">
+                <h2>{{ post.title }}</h2>
+                <p class="text-xs">{{ post.author_name }} ({{ post.pub_date }})</p>
+            </div>
+            <div class="post-content">{{ post.content|safe }}</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

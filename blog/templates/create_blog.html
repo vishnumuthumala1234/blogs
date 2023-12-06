@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <style>
+    .create-blog-container {
+        background-color: #93bee9;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        margin: 2rem auto;
+        max-width: 900px;
+    }
+
+    h1 {
+        color: #2b6cb0;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    nav {
+      background-color: #2b6cb0;
+      padding: 1rem;
+  }
+
+  ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+  }
+
+  li {
+      margin-right: 1rem;
+  }
+
+  a {
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+  }
+
+  a:hover {
+      color: #edf2f7;
+  }
+
+    .create-blog-form {
+        margin-top: 1.5rem;
+    }
+
+    .create-blog-form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #2d3748;
+        font-size: 1.2rem;
+    }
+
+    .create-blog-form input,
+    .create-blog-form textarea {
+        width: 100%;
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid #cbd5e0;
+        border-radius: 5px;
+        background-color: #edf2f7;
+        color: #2d3748;
+    }
+
+    .create-blog-form button {
+        background-color: #4299e1;
+        color: #ffffff;
+        padding: 1rem 1.5rem;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .create-blog-form button:hover {
+        background-color: #2b6cb0;
+    }
+
+    .back-to-blog-list {
+        display: block;
+        margin-top: 1.5rem;
+        color: red;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: color 0.3s ease;
+    }
+
+    .back-to-blog-list:hover {
+        color: #2b6cb0;
+    }
+  </style>
+
+  <div class="create-blog-container">
+    <h1>Create Blog</h1>
+    <form class="create-blog-form" method="post" action="{% url 'create_blog' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Create</button>
+    </form>
+    <a class="back-to-blog-list" href="{% url 'blog_list' %}">Back to Blog List</a>
+  </div>
+{% endblock %}
