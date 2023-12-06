@@ -7,7 +7,17 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def blog_list(request):
     posts = Post.objects.all()
-   
+    paginator = Paginator(posts, 3)  # Show 10 blogs per page
+
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver the first page.
+        posts = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g., 9999), deliver the last page of results.
+        posts = paginator.page(paginator.num_pages)
     return render(request, 'blog_list.html', {'posts': posts})
 
 def create_blog(request):
