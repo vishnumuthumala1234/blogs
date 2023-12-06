@@ -142,7 +142,7 @@
             <div class="post-container">
                 <h2 class="post-title">
                     <a href="{% url 'blog_detail' post.id %}">{{ post.title }}</a>
-                    <a class="text-xs">{{ post.author_name }} ({{ post.pub_date }})</a>
+                    <a class="text-xs">{{ post.name }} ({{ post.pub_date }})</a>
                 </h2>
                 <p class="post-content">{{ post.content|truncatewords:200 }}</p>
                 <a class="read-more" href="{% url 'blog_detail' post.id %}">Read More</a>
