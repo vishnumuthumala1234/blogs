@@ -1,64 +1,51 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to My Blog</title>
+    <title>My Blogs</title>
     <!-- Include Tailwind CSS in your HTML -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        .max-w-2xl {
-            max-width: 70rem;
-        }
-
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f7fafc;
-            color: #1a202c;
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+            margin: 0;
+            padding: 0;
         }
 
-        .blog-container {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        .blog-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             padding: 2rem;
-            margin-bottom: 2rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            word-break: break-all;
+            margin: 2rem 0;
+            transition: transform 0.3s ease-in-out;
+        }
 
+        .blog-card:hover {
+            transform: scale(1.02);
         }
 
         .blog-title {
             font-size: 2.5rem;
             font-weight: 700;
-            color: #4a5568;
+            color: #3498db;
             margin-bottom: 1rem;
         }
 
         .blog-description {
-            font-size: 1.25rem;
-            color: #718096;
-            margin-bottom: 2rem;
-        }
-
-        .post-container {
-            margin-bottom: 2rem;
-        }
-
-        .post-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: #4299e1;
-            margin-bottom: 1rem;
-        }
-
-        .post-content {
-            font-size: 1rem;
-            color: #2d3748;
+            font-size: 1.2rem;
+            color: #666;
             margin-bottom: 1.5rem;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 1rem;
         }
 
         .read-more {
@@ -73,7 +60,7 @@
         }
 
         .pagination {
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
 
         .pagination a {
@@ -87,69 +74,65 @@
         .pagination a:hover {
             color: #2d3748;
         }
-.center-pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem; /* Adjust the margin as needed */
-}
-.create-blog-button {
-    display: inline-block;
-    background-color: #4299e1;
-    color: #ffffff;
-    padding: 0.5rem 1rem;
-    font-size: 1.25rem;
-    text-decoration: none;  /* Remove underline */
-    border-radius: 0.25rem;
-    transition: background-color 0.3s ease;
-}
-.create-blog-button a {
-    text-decoration: none;  /* Remove underline */
-    color: inherit;  /* Inherit color from the parent */
-}
 
-.create-blog-button:hover {
-    background-color: #2b6cb0;
-}
-.create-blog-button-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 1rem;
-}
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
+        .center-pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
 
+        .create-blog-button {
+            display: inline-block;
+            background-color: #a4ce1a;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            font-size: 1.25rem;
+            text-decoration: none;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .create-blog-button a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .create-blog-button:hover {
+            background-color: #660ba7;
+        }
+
+        .create-blog-button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1.5rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
     </style>
 </head>
 <body>
+    <div class="container mx-auto">
+        <h1 class="text-4xl font-bold text-center my-8">My Blogs</h1>
 
-
-<>
-
-    <div class="w-full max-w-2xl mx-auto blog-container">
-        <div class="header">
-            <h1 class="blog-title">Welcome to My Blog</h1>
-            <div class="create-blog-button">
-                <a class="read-more" href="{% url 'create_blog' %}">Create Blog</a>
-            </div>
+        <div class="create-blog-button-container">
+            <a class="create-blog-button" href="{% url 'create_blog' %}">Add Blog</a>
         </div>
-        <p class="blog-description">Explore the latest posts and get inspired.</p>
 
-        {% for post in posts %}
-            <div class="post-container">
-                <h2 class="post-title">
-                    <a href="{% url 'blog_detail' post.id %}">{{ post.title }}</a>
-                    <a class="text-xs">{{ post.name }} ({{ post.pub_date }})</a>
-                </h2>
-                <p class="post-content">{{ post.content|truncatewords:200 }}</p>
-                <a class="read-more" href="{% url 'blog_detail' post.id %}">Read More</a>
-            </div>
-        {% endfor %}
-
-        <!-- Navigation Bar for Blog Posts -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for post in posts %}
+                <div class="blog-card">
+                    <h2 class="blog-title">{{ post.title }}</h2>
+                    <p class="blog-description">{{ post.content|truncatewords:30 }}</p>
+                    <p class="post-meta">Published by {{ post.author_name }} on {{ post.pub_date }}</p>
+                    <a class="read-more" href="{% url 'blog_detail' post.id %}">Read More</a>
+                </div>
+            {% endfor %}
+        </div>
 
         <!-- Pagination -->
         <div class="pagination center-pagination">
@@ -172,10 +155,3 @@
     </div>
 </body>
 </html>
-
-
-
-
-
-
-
